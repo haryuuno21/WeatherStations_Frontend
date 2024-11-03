@@ -1,0 +1,27 @@
+.inputField {
+    display: flex;
+    padding: 12px 0;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.inputField > input {
+    border: none;
+    height: 36px;
+    border-radius: 6px;
+    margin: 4px 5px;
+    padding: 4px;
+    padding-left: 12px;
+    background: #FFFFFF;
+    outline:none;
+    font-family: Arial;
+    font-size: 16px;
+    color: black;
+}
+
+.inputField > button {
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    height: 28px;
+    font-size: 14px;
+}

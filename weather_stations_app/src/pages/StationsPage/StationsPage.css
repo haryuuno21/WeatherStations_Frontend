@@ -1,0 +1,23 @@
+#stations-page {
+    display: flex;
+    flex-direction: row;
+    padding: 20px 40px;
+    min-width: 880px;
+}
+
+.card{
+    border-radius: 12px;
+    background: #FFFFFF;
+    display: flex;
+    width: 220px;
+    height: 334px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    flex-shrink: 0;
+}
+.station-card-col{
+    margin-right: 100px;
+    width: 220px;
+}

@@ -1,0 +1,35 @@
+.report-card{
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    background: #FFFFFF;
+    gap: 25px;
+    padding: 14px 21px 10px 21px;
+    width: 304px;
+    height: auto;
+    margin-top:40px;
+}
+.report-card > .card-body{
+    padding: 0;
+}
+.report-card > .card-body > button{
+    padding: 0;
+    width: 270px;
+    --bs-btn-color: black;
+    --bs-btn-bg: #ECEEF2;
+    --bs-btn-border-color: #ECEEF2;
+    --bs-btn-hover-color: black;
+    --bs-btn-hover-bg: #DFE1E7;
+    --bs-btn-hover-border-color: #DFE1E7;
+    --bs-btn-focus-shadow-rgb: 49, 132, 253;
+    --bs-btn-active-color: black;
+    --bs-btn-active-bg: #DFE1E7;
+    --bs-btn-active-border-color: #DFE1E7;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color:  black;
+    --bs-btn-disabled-bg: #DFE1E7;
+    --bs-btn-disabled-border-color: #DFE1E7;
+}
+.report-card > .card-body > .textStyle{
+    margin-bottom: 0px;
+}

@@ -1,0 +1,29 @@
+:root {
+    --active_color: black;
+    --additional_color: gray;
+  }
+  
+  .breadcrumbs {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    padding: 20px;
+  }
+  
+  .breadcrumbs * {
+    color: var(--additional_color);
+    transition: 0.5s;
+  }
+  
+  .breadcrumbs *:not(.slash):hover {
+    color: var(--active_color);
+  }
+  
+  .breadcrumbs li {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .breadcrumbs li:last-child {
+    color: var(--active_color);
+  }

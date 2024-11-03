@@ -1,0 +1,28 @@
+#station-info{
+  width: 1110px;
+  height: 600px;
+  display: flex;
+  flex-direction: row;
+  font-size: 24px;
+}
+.bold{
+  font-weight: bold;
+}
+.station-info > .card-body{
+  text-wrap:wrap;
+  width: 200px;
+}
+.station-info > .container{
+  width: 500px;
+  margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+}
+.station-info > div > .card-image{
+  border-radius: 12px;
+  margin-bottom: 30px;
+}
+
+.largeText{
+  font-size: 36px;
+}

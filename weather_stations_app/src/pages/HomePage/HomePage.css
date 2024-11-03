@@ -1,0 +1,6 @@
+#home-page > .row{
+    display: flex;
+    margin-top: 200px;
+    justify-content: center;
+    justify-items: center;
+}

@@ -5,12 +5,29 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.btn-primary{
+  --bs-btn-color: black;
+  --bs-btn-bg: #FFFFFF;
+  --bs-btn-border-color: #FFFFFF;
+  --bs-btn-hover-color: black;
+  --bs-btn-hover-bg: #DFE1E7;
+  --bs-btn-hover-border-color: #DFE1E7;
+  --bs-btn-focus-shadow-rgb: 49, 132, 253;
+  --bs-btn-active-color: black;
+  --bs-btn-active-bg: #DFE1E7;
+  --bs-btn-active-border-color: #DFE1E7;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color:  black;
+  --bs-btn-disabled-bg: #DFE1E7;
+  --bs-btn-disabled-border-color: #DFE1E7;
+  border-radius: 20px;
 }
 
 a {
@@ -24,10 +41,10 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  justify-content: center;
+  background-color: #ECEEF2;
 }
 
 h1 {
@@ -46,6 +63,7 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }

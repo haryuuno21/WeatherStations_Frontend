@@ -1,23 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './index.css'
-import StartPage from './App.tsx'
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <StartPage />
-  },
-  {
-    path: '/new',
-    element: <h1>Это наша страница с чем-то новеньким</h1>
-  }
-])
+import App from './App'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <App />
   </React.StrictMode>,
 )

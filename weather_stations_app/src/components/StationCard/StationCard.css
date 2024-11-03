@@ -1,0 +1,38 @@
+.station-card {
+    padding: 10px;
+    gap:0px;
+    margin-bottom: 40px;
+}
+.loadingBg {
+    z-index: 999;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    margin-left: 100px;
+    margin-top: 100px;
+}
+.textStyle {
+    height:48px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    margin-bottom:12px;
+}
+.cardImage {
+    margin-top: 10px;
+    object-fit: fill;
+    border-radius: 12px;
+    width: 154px;
+    height: 164px;
+    cursor: pointer;
+}
+.cardButton {
+    width: 100%;
+}
+.station-card-body{
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    text-wrap: wrap;
+}
