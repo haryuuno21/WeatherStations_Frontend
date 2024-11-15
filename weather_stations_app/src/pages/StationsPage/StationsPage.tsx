@@ -9,9 +9,12 @@ import { StationCard } from "../../components/StationCard/StationCard";
 import { useNavigate } from "react-router-dom";
 import { ReportCard } from "../../components/ReportCard/ReportCard";
 import { STATIONS_MOCK } from "../../modules/mock";
+import {useDispatch} from "react-redux";
+import { setStationNameAction, useStationName } from "../../slices/dataSlice";
 
 export const StationsPage: FC = () => {
-  const [searchValue, setSearchValue] = useState("");
+  const dispatch = useDispatch()
+  const station_name = useStationName()
   const [loading, setLoading] = useState(false);
   const [stations, setStations] = useState<IStation[]>([]);
   const [stationsCount, setStationsCount] = useState(0);
@@ -19,7 +22,7 @@ export const StationsPage: FC = () => {
 
   const handleSearch = () => {
     setLoading(true);
-    getStationsByName(searchValue)
+    getStationsByName(station_name)
       .then((response) => {
         setStations(
           response.stations
@@ -29,7 +32,7 @@ export const StationsPage: FC = () => {
       })
       .catch(() => {
         setStations(STATIONS_MOCK.stations.filter((item)=>
-        item.short_name.toLocaleLowerCase().search(searchValue.toLocaleLowerCase())>=0))
+        item.short_name.toLocaleLowerCase().search(station_name.toLocaleLowerCase())>=0))
         setLoading(false);
         setStationsCount(STATIONS_MOCK.stations_count)
       })
@@ -53,8 +56,8 @@ export const StationsPage: FC = () => {
       <BreadCrumbs crumbs={[{ label: ROUTE_LABELS.STATIONS }]} />
       
       <InputField
-        value={searchValue}
-        setValue={(value) => setSearchValue(value)}
+        value={station_name}
+        setValue={(value) => dispatch(setStationNameAction(value))}
         loading={loading}
         onSubmit={handleSearch}
       />

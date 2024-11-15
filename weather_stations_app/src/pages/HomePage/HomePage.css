@@ -1,6 +1,11 @@
 #home-page > .row{
     display: flex;
-    margin-top: 200px;
+    margin-top: 150px;
     justify-content: center;
     justify-items: center;
+}
+.CarouselImage{
+    width: 500px;
+    height: 300px;
+    border-radius: 10px;
 }
