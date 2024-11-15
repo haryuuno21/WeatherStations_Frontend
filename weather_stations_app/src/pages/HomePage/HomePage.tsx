@@ -1,6 +1,4 @@
 import { FC } from "react";
-import { Link } from "react-router-dom";
-import { ROUTES } from "../../Routes";
 import {Carousel, Col, Container, Row } from "react-bootstrap";
 import "./HomePage.css"
 
