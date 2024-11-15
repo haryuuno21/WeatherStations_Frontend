@@ -15,11 +15,14 @@ export const StationInfoPage: FC = () => {
 
   useEffect(() => {
     if (!id) return;
-    getStationById(id)
-      .then((response) => setPageData(response))
+    getStationById(parseInt(id))
+      .then((response) => {
+        setPageData(response)
+      })
       .catch(()=>{
         setPageData(STATIONS_MOCK.stations[parseInt(id)])
-      })
+      });
+    return;
   }, [id]);
 
   return (

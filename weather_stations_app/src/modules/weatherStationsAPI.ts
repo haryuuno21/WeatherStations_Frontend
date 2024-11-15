@@ -21,9 +21,9 @@ export interface IStation {
   };
   
   export const getStationById = async (
-    id: number | string
+    id: number
   ): Promise<IStation> => {
-    return fetch(`http://localhost:3000/api/stations/${id}`).then(
+    return fetch(`http://localhost:3000/api/stations/${id}/`).then(
       (response) => response.json()
-    );
+    )
   };
