@@ -6,7 +6,7 @@ export const STATIONS_MOCK: IStationsResult = {
     stations:[
         {
             id:0,
-            photo_url:'http://localhost:9000/weather-station-images/0.webp',
+            photo_url:'/0.png',
             short_name:'ВДНХ',
             full_name:'Метеостанция ВДНХ',
             address:'129223, г.Москва, ВДНХ, Проспект Мира, вл.119,стр.423',
@@ -16,7 +16,7 @@ export const STATIONS_MOCK: IStationsResult = {
         },
         {
             id:1,
-            photo_url:'http://localhost:9000/weather-station-images/1.jpg',
+            photo_url:'/1.png',
             short_name:'Балчуг',
             full_name:'Метеостанция Балчуг',
             address:'115184, г.Москва, Средне-Овчинникосвкий пер., д.1, стр.4',
@@ -26,7 +26,7 @@ export const STATIONS_MOCK: IStationsResult = {
         },
         {
             id:2,
-            photo_url:'http://localhost:9000/weather-station-images/2.jpg',
+            photo_url:'/2.png',
             short_name:'Тушино',
             full_name:'Метеостанция Тушино',
             address:'123481, г.Москва, пос.Новобутаково, д.39, стр.1',
@@ -36,7 +36,7 @@ export const STATIONS_MOCK: IStationsResult = {
         },
         {
             id:3,
-            photo_url:'http://localhost:9000/weather-station-images/3.jpg',
+            photo_url:'/3.png',
             short_name:'Михайловское',
             full_name:'Метеостанция Михайловское',
             address:'142020, г.Москва, поселение Вороновское, д.Голохвастово, д.2г',
@@ -47,4 +47,4 @@ export const STATIONS_MOCK: IStationsResult = {
     ],
 }
 
-export const DEFAULT_PHOTO_URL: string = "http://localhost:9000/weather-station-images/no_photo.png"
+export const DEFAULT_PHOTO_URL: string = "/no_photo.png"
