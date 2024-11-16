@@ -2,6 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import './NavBar.css';
+import { ROUTES } from '../../Routes';
 
 function Navigation() {
   return (
@@ -16,7 +17,7 @@ function Navigation() {
           <span className="ms-2">Метеостанции Москвы</span>
         </Navbar.Brand>
         <Nav className="ms-auto">
-          <Nav.Link href="/stations">Метеостанции</Nav.Link>
+          <Nav.Link href={ROUTES.STATIONS}>Метеостанции</Nav.Link>
         </Nav>
       </Container>
     </Navbar>

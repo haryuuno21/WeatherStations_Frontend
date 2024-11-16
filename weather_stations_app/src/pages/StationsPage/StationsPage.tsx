@@ -4,7 +4,7 @@ import { Col, Container, Row, Spinner } from "react-bootstrap";
 import { IStation, getStationsByName } from "../../modules/weatherStationsAPI";
 import { InputField } from "../../components/InputField/InputField";
 import { BreadCrumbs } from "../../components/BreadCrumbs/BreadCrumbs";
-import { ROUTES, ROUTE_LABELS } from "../../Routes";
+import { ROUTE_LABELS } from "../../Routes";
 import { StationCard } from "../../components/StationCard/StationCard";
 import { useNavigate } from "react-router-dom";
 import { ReportCard } from "../../components/ReportCard/ReportCard";
@@ -38,7 +38,7 @@ export const StationsPage: FC = () => {
       })
   };
   const handleCardClick = (id: number) => {
-    navigate(`${ROUTES.STATIONS}/${id}`);
+    navigate(`/stations/${id}`);
   };
 
   const handleButtonClick = () =>{

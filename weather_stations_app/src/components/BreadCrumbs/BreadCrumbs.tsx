@@ -2,7 +2,6 @@ import "./BreadCrumbs.css";
 import React from "react";
 import { Link } from "react-router-dom";
 import { FC } from "react";
-import { ROUTES } from "../../Routes";
 
 interface ICrumb {
   label: string;
@@ -19,7 +18,7 @@ export const BreadCrumbs: FC<BreadCrumbsProps> = (props) => {
   return (
     <ul className="breadcrumbs">
       <li>
-        <Link to={ROUTES.HOME}>Главная</Link>
+        <Link to="../">Главная</Link>
       </li>
       {!!crumbs.length &&
         crumbs.map((crumb, index) => (
