@@ -10,7 +10,7 @@ function Navigation() {
       <Container fluid>
         <Navbar.Brand href="./" className="d-flex align-items-center">
           <img
-            src="http://localhost:9000/weather-station-images/logo.png"
+            src='https://haryuuno21.github.io/WeatherStations_Frontend/logo.png'
             alt="Logo"
             className="d-inline-block align-top"
           />
