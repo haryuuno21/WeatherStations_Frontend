@@ -25,3 +25,8 @@
     height: 28px;
     font-size: 14px;
 }
+@media (max-width:460px) {
+    .inputField > input {
+        width: 180px;
+    }
+  }

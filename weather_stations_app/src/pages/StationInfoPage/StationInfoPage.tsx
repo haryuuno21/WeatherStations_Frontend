@@ -38,8 +38,6 @@ export const StationInfoPage: FC = () => {
           <Card.Img
             className="card-image"
             src={pageData?.photo_url || DEFAULT_PHOTO_URL}
-            height={269}
-            width={437}
           />
           <Card.Title className="largeText">{pageData?.full_name || 'Метеостанция'}</Card.Title>
         </Container>
