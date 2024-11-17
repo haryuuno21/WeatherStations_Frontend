@@ -8,23 +8,23 @@
     "orientation": "portrait-primary",
     "icons": [
       {
-        "src": "/logo.png",
+        "src": "/WeatherStations_Frontend/logo.png",
         "type": "image/png", "sizes": "60x60"
       },
       {
-        "src": "/logo360.png",
+        "src": "/WeatherStations_Frontend/logo360.png",
         "type": "image/png", "sizes": "360x360"
       }
     ],
     "screenshots": [
     {
-      "src": "/screenshot-desktop.png",
+      "src": "/WeatherStations_Frontend/screenshot-desktop.png",
       "sizes": "1409x965",
       "type": "image/png",
       "form_factor": "wide"
     },
     {
-      "src": "/screenshot-mobile.png",
+      "src": "/WeatherStations_Frontend/screenshot-mobile.png",
       "sizes": "468x964",
       "type": "image/png"
     }
