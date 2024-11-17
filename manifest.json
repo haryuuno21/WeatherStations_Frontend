@@ -1,7 +1,7 @@
 {
     "name": "Weather stations",
     "short_name": "Weather stations",
-    "start_url": "/",
+    "start_url": "https://haryuuno21.github.io/WeatherStations_Frontend/",
     "display": "standalone",
     "background_color": "#fdfdfd",
     "theme_color": "#db4938",
