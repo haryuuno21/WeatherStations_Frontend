@@ -1,6 +1,7 @@
 #home-page > .row{
     display: flex;
     margin-top: 150px;
+    padding-bottom: 20px;
     justify-content: center;
     justify-items: center;
 }
