@@ -34,7 +34,7 @@
 #station-info-page{
   padding-bottom: 50px;
 }
-@media (max-width:460px) {
+@media (max-width:1080px) {
   .station-info > .container{
     width: auto;
     margin: 10px;
