@@ -13,19 +13,17 @@ function App() {
     if (isTauri) {
       const { invoke } = (window as any).__TAURI__.tauri;
 
-      // Вызов команды create
       invoke("create")
         .then((response: any) => console.log("Создано:", response))
         .catch((error: any) => console.error("Ошибка создания:", error));
 
-      // Возврат функции очистки, вызов команды close
       return () => {
         invoke("close")
           .then((response: any) => console.log("Закрыто:", response))
           .catch((error: any) => console.error("Ошибка закрытия:", error));
       };
     } else {
-      console.warn("Приложение запущено вне среды Tauri.");
+      
     }
   }, []);
 
