@@ -1,0 +1,32 @@
+{
+    "name": "Weather stations",
+    "short_name": "Weather stations",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#fdfdfd",
+    "theme_color": "#db4938",
+    "orientation": "portrait-primary",
+    "icons": [
+      {
+        "src": "/WeatherStations_Frontend/logo.png",
+        "type": "image/png", "sizes": "60x60"
+      },
+      {
+        "src": "/WeatherStations_Frontend/logo360.png",
+        "type": "image/png", "sizes": "360x360"
+      }
+    ],
+    "screenshots": [
+    {
+      "src": "/WeatherStations_Frontend/screenshot-desktop.png",
+      "sizes": "1409x965",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/WeatherStations_Frontend/screenshot-mobile.png",
+      "sizes": "468x964",
+      "type": "image/png"
+    }
+  ]
+  }
