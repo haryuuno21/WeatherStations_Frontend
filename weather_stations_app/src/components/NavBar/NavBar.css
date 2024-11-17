@@ -17,4 +17,11 @@
         padding-left: 0px;
         padding-right: 0px;
     }
+    .navbar-brand{
+        font-size: 20px;
+        text-wrap: wrap;
+    }
+    .nav-link{
+        font-size: 13px;
+    }
 }
