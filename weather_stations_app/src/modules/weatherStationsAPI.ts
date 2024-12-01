@@ -15,7 +15,7 @@ export interface IStation {
   }
   
   export const getStationsByName = async (name = ""): Promise<IStationsResult> => {
-    return fetch(`http://localhost:3000/api/stations/?station_name=${name}`).then(
+    return fetch(`http://localhost:8000/stations/?station_name=${name}`).then(
       (response) => response.json()
     );
   };
@@ -23,7 +23,7 @@ export interface IStation {
   export const getStationById = async (
     id: number
   ): Promise<IStation> => {
-    return fetch(`http://localhost:3000/api/stations/${id}/`).then(
+    return fetch(`http://localhost:8000/stations/${id}/`).then(
       (response) => response.json()
     )
   };
