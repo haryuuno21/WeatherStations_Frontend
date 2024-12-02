@@ -1,0 +1,24 @@
+#registration-page{
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.registration-page.card{
+    width: 300px;
+    height: 400px;
+}
+
+.registration-page > .card-title{
+    margin-top:35px;
+}
+
+.registration.btn{
+    margin-top: 20px;
+}
+
+.registration-form{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}

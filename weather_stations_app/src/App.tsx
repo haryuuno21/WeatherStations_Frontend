@@ -4,6 +4,8 @@ import { StationsPage } from "./pages/StationsPage/StationsPage.tsx";
 import { HomePage } from "./pages/HomePage/HomePage";
 import { ROUTES } from "./Routes";
 import Navigation from './components/NavBar/NavBar.tsx';
+import { AuthPage } from "./pages/AuthPage/AuthPage.tsx";
+import { RegistrationPage } from "./pages/RegistrationPage/RegistrationPage.tsx";
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <Route path={ROUTES.HOME} index element={<HomePage />} />
         <Route path={ROUTES.STATIONS} element={<StationsPage />} />
         <Route path={`${ROUTES.STATIONS}/:id`} element={<StationInfoPage />} />
+        <Route path={ROUTES.LOGIN} element={<AuthPage />} />
+        <Route path={ROUTES.REGISTRATION} element={<RegistrationPage />} />
       </Routes>
     </BrowserRouter>
   );
