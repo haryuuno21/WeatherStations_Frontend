@@ -1,0 +1,60 @@
+#report-info-page{
+    display: flex;
+    justify-content: center;
+}
+.report-info.card{
+    margin-top: 20px;
+    width: 800px;
+    align-items: flex-start;
+    height: auto;
+}
+.report-body > .card-text {
+    font-size: 24px;
+    margin-left: 40px;
+}
+
+.report-header{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding-left: 10px;
+}
+
+.date-input-block{
+    display:flex;
+    background:#ECEEF2;
+    border-radius: 12px;
+    font-size: 20px;
+    padding-left: 15px;
+    align-items: center;
+    gap:20px;
+}
+
+.report-date-input{
+    border:none;
+    background:#ECEEF2;
+    width: 120px;
+    text-decoration-color: black;
+}
+
+.report-body{
+    display: flex;
+    flex-direction: column;
+    gap:40px;
+}
+.station-card-col{
+    width: auto;
+}
+
+.station-report-image{
+    padding: 10px;
+    margin-top: 0;
+    cursor: auto;
+}
+
+.form-button{
+    background-color: #ECEEF2;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}

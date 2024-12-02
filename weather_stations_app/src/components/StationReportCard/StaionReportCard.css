@@ -1,0 +1,20 @@
+.station-report-card{
+    flex-direction: row;
+    width: 700px;
+    height: auto;
+    background: #ECEEF2;
+    margin-left: 40px;
+}
+
+.station-report-body{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.temperature-input{
+    border:none;
+    background:#FFFFFF;
+    border-radius: 12px;
+    padding: 10px;
+}
