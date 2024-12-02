@@ -1,6 +1,6 @@
-import { IStationsResult } from "./weatherStationsAPI";
+import { stations } from "../api"
 
-export const STATIONS_MOCK: IStationsResult = {
+export const STATIONS_MOCK: stations = {
     stations_count: 0,
     current_report: undefined,
     stations:[

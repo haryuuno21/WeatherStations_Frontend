@@ -1,29 +1,30 @@
 import "./StationsPage.css";
 import { FC, useEffect, useState } from "react";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
-import { IStation, getStationsByName } from "../../modules/weatherStationsAPI";
 import { InputField } from "../../components/InputField/InputField";
 import { BreadCrumbs } from "../../components/BreadCrumbs/BreadCrumbs";
 import { ROUTES, ROUTE_LABELS } from "../../Routes";
 import { StationCard } from "../../components/StationCard/StationCard";
 import { useNavigate } from "react-router-dom";
 import { STATIONS_MOCK } from "../../modules/mock";
-import {useDispatch} from "react-redux";
-import { setStationNameAction, useStationName } from "../../slices/dataSlice";
+import { useAppDispatch } from "../../store";
+import { dataActions, useStationName } from "../../store/data";
+import { ReportCard } from "../../components/ReportCard/ReportCard";
+import { api,station } from '../../api'
 
 export const StationsPage: FC = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const station_name = useStationName()
   const [loading, setLoading] = useState(false);
-  const [stations, setStations] = useState<IStation[]>([]);
+  const [stations, setStations] = useState<station[]>([]);
   const navigate = useNavigate();
 
   const handleSearch = () => {
     setLoading(true);
-    getStationsByName(station_name)
+    api.stations.stationsList({station_name:station_name})
       .then((response) => {
         setStations(
-          response.stations
+          response.data.stations
         );
         setLoading(false);
       })
@@ -33,7 +34,7 @@ export const StationsPage: FC = () => {
         setLoading(false);
       })
   };
-  const handleCardClick = (id: number) => {
+  const handleCardClick = (id?: number) => {
     navigate(`${ROUTES.STATIONS}/${id}`);
   };
 
@@ -49,7 +50,7 @@ export const StationsPage: FC = () => {
       
       <InputField
         value={station_name}
-        setValue={(value) => dispatch(setStationNameAction(value))}
+        setValue={(value) => dispatch(dataActions.setStationName(value))}
         loading={loading}
         onSubmit={handleSearch}
       />

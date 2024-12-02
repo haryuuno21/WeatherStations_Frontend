@@ -4,9 +4,9 @@ import "./StationCard.css";
 import { DEFAULT_PHOTO_URL } from "../../modules/mock";
 
 interface ICardProps {
-  photo_url?: string;
+  photo_url?: string | null;
   short_name: string;
-  sea_level: number;
+  sea_level?: number;
   imageClickHandler: () => void;
 }
 

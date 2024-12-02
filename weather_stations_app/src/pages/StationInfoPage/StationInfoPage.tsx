@@ -3,21 +3,21 @@ import { FC, useEffect, useState } from "react";
 import { BreadCrumbs } from "../../components/BreadCrumbs/BreadCrumbs";
 import { ROUTES, ROUTE_LABELS } from "../../Routes";
 import { useParams } from "react-router-dom";
-import { IStation, getStationById } from "../../modules/weatherStationsAPI";
 import { Container, Card } from "react-bootstrap";
 import { STATIONS_MOCK } from "../../modules/mock";
 import { DEFAULT_PHOTO_URL } from "../../modules/mock";
+import { api, station } from "../../api";
 
 export const StationInfoPage: FC = () => {
-  const [pageData, setPageData] = useState<IStation>();
+  const [pageData, setPageData] = useState<station>();
 
   const { id } = useParams();
 
   useEffect(() => {
     if (!id) return;
-    getStationById(parseInt(id))
+    api.stations.stationsRead(id)
       .then((response) => {
-        setPageData(response)
+        setPageData(response.data)
       })
       .catch(()=>{
         setPageData(STATIONS_MOCK.stations[parseInt(id)])

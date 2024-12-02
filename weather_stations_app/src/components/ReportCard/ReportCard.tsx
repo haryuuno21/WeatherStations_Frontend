@@ -2,16 +2,7 @@ import { FC } from "react";
 import { Button, Card } from "react-bootstrap";
 import "./ReportCard.css";
 
-interface ICardProps {
-  stations_count: number;
-  buttonClickHandler: () => void;
-}
-
-export const ReportCard: FC<ICardProps> = ({
-  stations_count,
-  buttonClickHandler,
-}) => {
-
+export const ReportCard: FC = () => {
   return (
     <Card className="report-card">
       <Card.Body>
