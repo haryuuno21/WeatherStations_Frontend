@@ -12,6 +12,7 @@ import { dataActions, useStationName } from "../../store/data";
 import { ReportCard } from "../../components/ReportCard/ReportCard";
 import { api,station } from '../../api'
 import { useUserGroup } from "../../store/user";
+import { reportActions } from "../../store/report";
 
 export const StationsPage: FC = () => {
   const dispatch = useAppDispatch();
@@ -20,6 +21,24 @@ export const StationsPage: FC = () => {
   const [stations, setStations] = useState<station[]>([]);
   const userGroup = useUserGroup();
   const navigate = useNavigate();
+
+  const firstLoadSearch = () => {
+    setLoading(true);
+    api.stations.stationsList({station_name:station_name})
+      .then((response) => {
+        setStations(
+          response.data.stations
+        );
+        dispatch(reportActions.setCurrentReport(response.data.current_report))
+        dispatch(reportActions.setStationsCount(response.data.stations_count))
+        setLoading(false);
+      })
+      .catch(() => {
+        setStations(STATIONS_MOCK.stations.filter((item)=>
+        item.short_name.toLocaleLowerCase().search(station_name.toLocaleLowerCase())>=0))
+        setLoading(false);
+      })
+  }
 
   const handleSearch = () => {
     setLoading(true);
@@ -41,7 +60,7 @@ export const StationsPage: FC = () => {
   };
 
   useEffect(()=>{
-    handleSearch();
+    firstLoadSearch();
     return;
   },[])
 
@@ -81,6 +100,9 @@ export const StationsPage: FC = () => {
         ))
       }
       </Col>
+      {userGroup!='guest' && (<Col>
+        <ReportCard></ReportCard>
+      </Col>)}
     </Container>
   );
 };

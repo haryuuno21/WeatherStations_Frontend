@@ -22,6 +22,18 @@ export const ReportPage: FC = () => {
     return;
   }, [id]);
 
+  const onRemoveStation = (station_id: string) => {
+    console.log(station_id)
+    setPageData((prevData) => {
+      if (!prevData) return prevData;
+  
+      return {
+        ...prevData,
+        stations: prevData.stations.filter(station => station.station_id !== station_id),
+      };
+    });
+  }
+
   return (
     <Container id="report-info-page">
       <Card className="report-info">
@@ -31,7 +43,7 @@ export const ReportPage: FC = () => {
                 <span>Дата:  </span>
                 <input className="report-date-input" placeholder={
                     format(new Date(pageData?.report_date|| "01.01.2024"), 'dd.MM.yyyy')}
-                    type="text"/>
+                    type="date"/>
             </div>
         </Container>
         <Card.Body className="report-body">
@@ -48,12 +60,14 @@ export const ReportPage: FC = () => {
         ) : (pageData.stations.map((item, index) => (
             <div className="station-card-col" key={index}>
               <StationReportCard
-                {...item}
+                report_id = {id}
+                stationReport={item}
+                onRemove={onRemoveStation}
               />
             </div>
           ))
         ))}
-        <Button className="form-button">Сформировать</Button>
+        <Button type="submit" className="form-button">Сформировать</Button>
         </Card.Body>
         
       </Card>

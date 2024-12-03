@@ -15,9 +15,11 @@
 
 .report-header{
     display: flex;
-    justify-content: space-between;
     margin-top: 30px;
     padding-left: 10px;
+    margin-left: 40px;
+    margin-right: 40px;
+    gap:80px
 }
 
 .date-input-block{
@@ -28,6 +30,7 @@
     padding-left: 15px;
     align-items: center;
     gap:20px;
+    padding-right: 10px;
 }
 
 .report-date-input{
