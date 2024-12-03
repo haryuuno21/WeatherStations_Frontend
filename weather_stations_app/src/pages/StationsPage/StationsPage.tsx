@@ -11,12 +11,14 @@ import { useAppDispatch } from "../../store";
 import { dataActions, useStationName } from "../../store/data";
 import { ReportCard } from "../../components/ReportCard/ReportCard";
 import { api,station } from '../../api'
+import { useUserGroup } from "../../store/user";
 
 export const StationsPage: FC = () => {
-  const dispatch = useAppDispatch()
-  const station_name = useStationName()
+  const dispatch = useAppDispatch();
+  const station_name = useStationName();
   const [loading, setLoading] = useState(false);
   const [stations, setStations] = useState<station[]>([]);
+  const userGroup = useUserGroup();
   const navigate = useNavigate();
 
   const handleSearch = () => {
@@ -76,7 +78,8 @@ export const StationsPage: FC = () => {
               </Col>
             ))}
           </Row>
-        ))}
+        ))
+      }
       </Col>
     </Container>
   );

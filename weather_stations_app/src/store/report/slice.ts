@@ -15,11 +15,15 @@ const reportSlice = createSlice({
         },
         addStation(state){
             state.stationsCount += 1
-        }
+        },
         removeStation(state){
-            if(state.stationsCount>0)
-        }
+            if(state.stationsCount>0) state.stationsCount += 1
+        },
+        clearReportInfo(state){
+            state.stationsCount = 0
+            state.currentReport = null
+        },
     }
 })
 
-export const { actions: userActions, reducer: userReducer } = userSlice
+export const { actions: reportActions, reducer: reportReducer } = reportSlice

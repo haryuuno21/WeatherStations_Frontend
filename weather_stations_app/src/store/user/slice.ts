@@ -13,6 +13,10 @@ const userSlice = createSlice({
         setUserGroup(state, {payload}) {
             state.userGroup = payload
         },
+        logout(state){
+            state.userGroup = "guest"
+            state.userName = ""
+        }
     }
 })
 

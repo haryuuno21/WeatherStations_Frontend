@@ -1,2 +1,2 @@
-export { userActions, userReducer } from './slice'
-export { useUserName, useUserGroup } from './selectors'
+export { reportActions, reportReducer } from './slice'
+export { useCurrentReport, useStationsCount } from './selectors'

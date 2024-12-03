@@ -11,6 +11,13 @@
     font-style: normal;
     font-weight: 400;
 }
+.navbar-nav{
+    align-items: center;
+}
+.user-name{
+    margin-right: 20px;
+    font-weight: bolder;
+}
 @media (max-width:700px) {
     .navbar{
         padding-left: 0px;
