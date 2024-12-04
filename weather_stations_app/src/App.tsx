@@ -7,6 +7,7 @@ import Navigation from './components/NavBar/NavBar.tsx';
 import { AuthPage } from "./pages/AuthPage/AuthPage.tsx";
 import { RegistrationPage } from "./pages/RegistrationPage/RegistrationPage.tsx";
 import { ReportPage } from "./pages/ReportPage/ReportPage.tsx";
+import { AllReportsPage } from "./pages/AllReportsPage/AllReportsPage.tsx";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path={ROUTES.LOGIN} element={<AuthPage />} />
         <Route path={ROUTES.REGISTRATION} element={<RegistrationPage />} />
         <Route path={`${ROUTES.REPORTS}/:id`} element={<ReportPage />} />
+        <Route path={`${ROUTES.REPORTS}`} element={<AllReportsPage />} />
       </Routes>
     </BrowserRouter>
   );

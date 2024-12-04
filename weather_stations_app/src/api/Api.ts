@@ -10,38 +10,40 @@
  */
 
 export interface TemperatureReport {
+  /** ID */
+  id: number;
   /** Status */
-  status?: "Draft" | "Deleted" | "Formed" | "Completed" | "Rejected";
+  status: "Draft" | "Deleted" | "Formed" | "Completed" | "Rejected";
   /**
    * Report date
    * @format date
    */
-  report_date?: string | null;
+  report_date: string | null;
   /**
    * Creation date
    * @format date-time
    */
-  creation_date?: string;
+  creation_date: string;
   /**
    * Formation date
    * @format date-time
    */
-  formation_date?: string | null;
+  formation_date: string | null;
   /**
    * Completion date
    * @format date-time
    */
-  completion_date?: string | null;
+  completion_date: string | null;
   /** Creator id */
-  creator_id?: string;
+  creator_id: string;
   /** Moderator id */
-  moderator_id?: string;
+  moderator_id: string;
   /**
    * Average temperature
    * @min -2147483648
    * @max 2147483647
    */
-  average_temperature?: number | null;
+  average_temperature: number | null;
 }
 
 export interface StationReport {

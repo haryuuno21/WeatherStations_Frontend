@@ -1,0 +1,19 @@
+.report-small-card{
+    flex-direction: row;
+    width: 700px;
+    height: auto;
+    background: #ECEEF2;
+    margin-left: 40px;
+}
+
+.report-small-body{
+    display: flex;
+    align-items: center;
+    gap:50px;
+}
+.report-small-body > .card-text{
+    margin-bottom: 0;
+}
+.report-small-body > .card-title{
+    margin-bottom: 0;
+}

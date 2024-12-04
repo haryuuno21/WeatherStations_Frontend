@@ -39,6 +39,9 @@ export const Navigation: FC = () => {
           <span className="ms-2">Метеостанции Москвы</span>
         </Navbar.Brand>
         <Nav className="ms-auto">
+          {userGroup != "guest" &&
+          <Nav.Link as={Link} to={ROUTES.REPORTS}>Отчеты</Nav.Link>
+          }
           <Nav.Link style={{marginRight: "50px"}} as={Link} to={ROUTES.STATIONS}>Метеостанции</Nav.Link>
           {
             userGroup == "guest" ?
