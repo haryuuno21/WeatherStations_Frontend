@@ -46,7 +46,7 @@ export const Navigation: FC = () => {
           {
             userGroup == "guest" ?
             (<Nav.Link as={Link} to={ROUTES.REGISTRATION}>Регистрация</Nav.Link>):
-            (<Nav.Item className='user-name'>{userName}</Nav.Item>)
+            (<Nav.Link as={Link} to={ROUTES.PROFILE} className='user-name'>{userName}</Nav.Link>)
           }
           {
             userGroup == "guest" ?

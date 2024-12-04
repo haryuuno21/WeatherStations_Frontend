@@ -8,6 +8,7 @@ import { AuthPage } from "./pages/AuthPage/AuthPage.tsx";
 import { RegistrationPage } from "./pages/RegistrationPage/RegistrationPage.tsx";
 import { ReportPage } from "./pages/ReportPage/ReportPage.tsx";
 import { AllReportsPage } from "./pages/AllReportsPage/AllReportsPage.tsx";
+import { ProfilePage } from "./pages/ProfilePage/ProfilePage.tsx";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path={ROUTES.REGISTRATION} element={<RegistrationPage />} />
         <Route path={`${ROUTES.REPORTS}/:id`} element={<ReportPage />} />
         <Route path={`${ROUTES.REPORTS}`} element={<AllReportsPage />} />
+        <Route path={`${ROUTES.PROFILE}`} element={<ProfilePage />} />
       </Routes>
     </BrowserRouter>
   );
