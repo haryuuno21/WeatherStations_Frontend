@@ -7,6 +7,7 @@ import axios from "axios";
 
 interface ICardProps{
   stationReport:StationReport;
+  is_draft:boolean;
   report_id?:string;
   onRemove: (stationId:string) => void;
 }
@@ -14,10 +15,17 @@ interface ICardProps{
 export const StationReportCard: FC<ICardProps> = ({
   stationReport,
   report_id,
+  is_draft,
   onRemove,
 }) => {
-
   const [temp, setTemperature] = useState(stationReport.temperature?.toString());
+
+  const removeStaion = () =>{
+    axios.delete(`http://localhost:3000/api/stations-reports/${report_id}/${stationReport.station_id}/remove_station/`)
+    .then(()=>{
+      onRemove(stationReport?.station_id||"");
+    })
+  }
 
   const changeTemp = () =>{
     axios.put(`http://localhost:3000/api/stations-reports/${report_id}/${stationReport.station_id}/put_temperature/`,
@@ -35,10 +43,11 @@ export const StationReportCard: FC<ICardProps> = ({
       <Card.Body className="station-report-body">
         <Card.Title>{stationReport.short_name}</Card.Title>
         <input className="temperature-input" 
+        disabled={!is_draft}
         value={temp}
         onBlur={changeTemp}
         onChange={(event) => setTemperature(event.target.value)} type="number"/>
-        <Button onClick={() => onRemove(stationReport?.station_id||"")}>Удалить</Button>
+        {is_draft && <Button onClick={() => removeStaion()}>Удалить</Button>}
       </Card.Body>
     </Card>
   );
