@@ -3,9 +3,8 @@ import { FC, FormEvent, useState } from "react";
 import { Container, Card , Form, Button} from "react-bootstrap";
 import { ROUTES } from "../../Routes";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { userActions } from "../../store/user";
 import { useAppDispatch } from "../../store";
+import { getUser } from "../../store/user/slice";
 
 export const AuthPage: FC = () => {
   const dispatch = useAppDispatch();
@@ -13,17 +12,15 @@ export const AuthPage: FC = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const submitUser = (event:FormEvent) =>{
+  const submitUser = async (event: FormEvent) => {
     event.preventDefault();
-    axios.post('http://localhost:3000/api/users/authentication/',{
-      username: login,
-      password: password,
-    }).then((response) =>{
-        dispatch(userActions.setUserGroup(response.data["userGroup"]))
-        dispatch(userActions.setUserName(response.data["userName"]))
-        navigate(`${ROUTES.STATIONS}`)
-    }).catch((response) => console.log(response.status))
-  }
+    try {
+        await dispatch(getUser({ login, password })).unwrap();
+        navigate(`${ROUTES.STATIONS}`);
+    } catch (error) {
+        alert("Неправильный логин или пароль");
+    }
+};
 
   return (
     <Container id="auth-page">

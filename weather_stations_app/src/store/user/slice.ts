@@ -40,9 +40,9 @@ const userSlice = createSlice({
 export const { actions: userActions, reducer: userReducer } = userSlice
 
 export const getUser = createAsyncThunk<userResponse,userRequest>('user/getUser', async (user:userRequest) =>{
-    const response : userResponse = await axios.post('http://localhost:3000/api/users/authentication/',{
+    const response = await axios.post('http://localhost:3000/api/users/authentication/',{
         username: user.login,
         password: user.password,
     })
-    return response
+    return response.data
 })

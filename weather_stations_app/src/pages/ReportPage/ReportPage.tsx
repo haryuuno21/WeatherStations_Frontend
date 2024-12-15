@@ -101,13 +101,14 @@ export const ReportPage: FC = () => {
         <Card.Body className="report-body">
           <div className="header-with-bin">
             <CardText>Добавленные метеостанции:</CardText>
+            {pageData?.status=="Draft" &&
             <input
               type="image"
               id="bin-image"
               alt="Удалить"
               src="http://localhost:9000/weather-station-images/bin_icon.png"
               onClick={deleteReport}
-            />
+            />}
           </div>
             {loading && (
         <div className="loadingBg">
