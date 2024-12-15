@@ -5,27 +5,19 @@ import { HomePage } from "./pages/HomePage/HomePage";
 import { ROUTES } from "./Routes";
 import Navigation from "./components/NavBar/NavBar";
 import { useEffect } from "react";
+import { invoke } from "@tauri-apps/api/core";
 
 function App() {
-  useEffect(() => {
-    const isTauri = Boolean((window as any).__TAURI__);
-
-    if (isTauri) {
-      const { invoke } = (window as any).__TAURI__.tauri;
-
-      invoke("create")
-        .then((response: any) => console.log("Создано:", response))
-        .catch((error: any) => console.error("Ошибка создания:", error));
-
-      return () => {
-        invoke("close")
-          .then((response: any) => console.log("Закрыто:", response))
-          .catch((error: any) => console.error("Ошибка закрытия:", error));
-      };
-    } else {
-      
+  useEffect(()=>{
+    invoke('tauri', {cmd:'create'})
+      .then(() =>{console.log("Tauri launched")})
+      .catch(() =>{console.log("Tauri not launched")})
+    return () =>{
+      invoke('tauri', {cmd:'close'})
+        .then(() =>{console.log("Tauri launched")})
+        .catch(() =>{console.log("Tauri not launched")})
     }
-  }, []);
+  }, [])
 
   return (
     <BrowserRouter>
