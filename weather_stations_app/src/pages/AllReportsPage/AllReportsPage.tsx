@@ -1,11 +1,6 @@
 import "./AllReportsPage.css";
 import { FC, useEffect, useState } from "react";
-import { BreadCrumbs } from "../../components/BreadCrumbs/BreadCrumbs";
-import { ROUTES, ROUTE_LABELS } from "../../Routes";
-import { useParams } from "react-router-dom";
 import { Container, Card, Spinner, Button } from "react-bootstrap";
-import { STATIONS_MOCK } from "../../modules/mock";
-import { DEFAULT_PHOTO_URL } from "../../modules/mock";
 import { api, report } from "../../api";
 import { ReportSmallInfo } from "../../components/ReportSmallInfo/ReportSmallInfo";
 
@@ -31,8 +26,8 @@ export const AllReportsPage: FC = () => {
 
     return (
     <Container id="reports-page">
-      <Card className="reports-info " id="reports-info">
-        <Container>
+      <Card className="reports-header">
+      <Container>
           <Card.Title className="largeText">Отчеты пользователя</Card.Title>
           <div className="reports-filters">
             <input
@@ -49,6 +44,7 @@ export const AllReportsPage: FC = () => {
             ></input>
             <h2>-</h2>
             <input
+              className="date-filter"
               value={endDate}
               onChange={(event) => setEndDate(event.target.value.trim())}
               type="date"
@@ -56,7 +52,19 @@ export const AllReportsPage: FC = () => {
             <Button variant="secondary" onClick={onApplyFilter}>Фильтр</Button>
           </div>
         </Container>
+      </Card>
+      <Card className="reports-info " id="reports-info">
         <Card.Body className="card-body">
+        <div className="report-card-col">
+          <Card className="header-card">
+          <Card.Text className="report-card-id">Отчет №</Card.Text>
+          <Card.Text className="report-card-date">Дата отчета</Card.Text>
+        <Card.Text className="report-card-status">Статус</Card.Text>
+        <Card.Text className="report-card-formed">Дата формирования</Card.Text>
+        <Card.Text className="report-card-temperature">Средняя температура</Card.Text>
+        <Card.Text className="report-card-text"></Card.Text>
+          </Card>
+        </div>
         {loading && (
         <div className="loadingBg">
           <Spinner animation="border" />
@@ -67,7 +75,7 @@ export const AllReportsPage: FC = () => {
           <div>
           </div>
         ) : (reports.map((item, index) => (
-            <div className="station-card-col" key={index}>
+            <div className="report-card-col" key={index}>
               <ReportSmallInfo {...item}/>
             </div>
           ))

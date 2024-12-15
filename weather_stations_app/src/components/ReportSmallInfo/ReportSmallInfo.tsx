@@ -7,12 +7,20 @@ import { ROUTES } from "../../Routes";
 
 export const ReportSmallInfo: FC<report> = (report) => {
   const navigate = useNavigate();
+  const status_to_rus = {"Formed":"Сформирован",
+                          "Completed":"Завершен",
+                          "Rejected":"Отклонен",
+                          "Draft":"Черновик",
+                          "Deleted":"Удален"
+                        }
   return (
     <Card className="report-small-card">
       <Card.Body className="report-small-body">
-        <Card.Title>Отчет №{report.id}</Card.Title>
-        <Card.Text>Дата отчета: {report.report_date}</Card.Text>
-        <Card.Text>Статус: {report.status}</Card.Text>
+        <Card.Title className="report-card-id">{report.id}</Card.Title>
+        <Card.Text className="report-card-date">{report.report_date}</Card.Text>
+        <Card.Text className="report-card-status">{status_to_rus[report.status]}</Card.Text>
+        <Card.Text className="report-card-formed">{report.formation_date}</Card.Text>
+        <Card.Text className="report-card-temperature">{report.average_temperature || "–"}</Card.Text>
         <Button onClick={() => navigate(`${ROUTES.REPORTS}/${report.id}`)}>Подробнее</Button>
       </Card.Body>
     </Card>

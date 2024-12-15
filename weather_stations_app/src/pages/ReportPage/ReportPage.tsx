@@ -25,6 +25,15 @@ export const ReportPage: FC = () => {
       })
   }
 
+  const deleteReport = () =>{
+    if (!id) return;
+    axios.delete(`http://localhost:3000/api/reports/${id}/delete/`)
+    .then(()=>{
+      dispatch(reportActions.clearReportInfo())
+      navigate(`${ROUTES.STATIONS}`)
+    })
+  }
+
   const formReport = () => {
     if (!id) return;
     axios.put(`http://localhost:3000/api/reports/${id}/form/`)
@@ -90,7 +99,16 @@ export const ReportPage: FC = () => {
             </div>
         </Container>
         <Card.Body className="report-body">
+          <div className="header-with-bin">
             <CardText>Добавленные метеостанции:</CardText>
+            <input
+              type="image"
+              id="bin-image"
+              alt="Удалить"
+              src="http://localhost:9000/weather-station-images/bin_icon.png"
+              onClick={deleteReport}
+            />
+          </div>
             {loading && (
         <div className="loadingBg">
           <Spinner animation="border" />

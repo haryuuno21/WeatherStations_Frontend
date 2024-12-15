@@ -8,9 +8,17 @@
     align-items: flex-start;
     height: auto;
 }
-.report-body > .card-text {
+.header-with-bin{
+    display: flex;
+    justify-content: space-between;
+}
+.report-body >div > .card-text {
     font-size: 24px;
     margin-left: 40px;
+}
+#bin-image{
+    margin-right: 100px;
+    width: 50px;
 }
 
 .report-header{
