@@ -49,14 +49,17 @@
 .report-card-date{
     width: 100px;
     margin-bottom: 0;
+    text-align: center;
 }
 .report-card-status{
     width: 105px;
     margin-bottom: 0;
+    text-align: center;
 }
 .report-card-formed{
     width: 165px;
     margin-bottom: 0;
+    text-align: center;
 }
 .report-card-temperature{
     width: 100px;
