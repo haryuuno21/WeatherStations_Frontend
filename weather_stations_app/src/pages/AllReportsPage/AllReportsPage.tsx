@@ -3,25 +3,26 @@ import { FC, useEffect, useState } from "react";
 import { Container, Card, Spinner, Button } from "react-bootstrap";
 import { api, report } from "../../api";
 import { ReportSmallInfo } from "../../components/ReportSmallInfo/ReportSmallInfo";
+import { useAppDispatch } from "../../store";
+import { useReports } from "../../store/reports";
+import { getReports } from "../../store/reports/slice";
 
 export const AllReportsPage: FC = () => {
-    const [reports, setReports] = useState<report[]>();
+    const dispatch = useAppDispatch();
+    const reports = useReports();
     const [status, setStatus] = useState("");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [loading, setLoading] = useState(false);
     useEffect(() => {
-      setLoading(true)
-        api.reports.reportsList({status:status,"start-date":startDate,"end-date":endDate})
-        .then((response) => {setReports(response.data);setLoading(false)})
-        return;
+      onApplyFilter()
     }, []);
 
     const onApplyFilter = () =>{
       setLoading(true)
-      api.reports.reportsList({status:status,"start-date":startDate,"end-date":endDate})
-      .then((response) => {setReports(response.data);setLoading(false)})
-      return;
+      dispatch(getReports({status:status,startDate:startDate,endDate:endDate}))
+        .then(() => setLoading(false))
+        return;
     }
 
     return (

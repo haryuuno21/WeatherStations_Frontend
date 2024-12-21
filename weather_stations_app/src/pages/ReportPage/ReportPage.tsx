@@ -2,41 +2,37 @@ import "./ReportPage.css";
 import { FC, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Container, Card, CardText,Spinner, Button } from "react-bootstrap";
-import { api, temperatureReport } from "../../api";
 import { StationReportCard } from "../../components/StationReportCard/StationReportCard";
 import { useAppDispatch } from "../../store";
-import axios from "axios";
 import { ROUTES } from "../../Routes";
 import { stationsActions } from "../../store/stations";
+import { useReportInfo } from "../../store/reports";
+import { changeReportDate, deleteReport, formReport, getReportInfo, reportsActions } from "../../store/reports/slice";
 
 export const ReportPage: FC = () => {
   const dispatch = useAppDispatch();
-  const [pageData, setPageData] = useState<temperatureReport>();
+  const pageData = useReportInfo();
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
 
   const getPageData = (id:string) => {
     setLoading(true)
-    api.reports.reportsRead(id)
-      .then((response) => {
-        setPageData(response.data)
-        setLoading(false)
-      })
+    dispatch(getReportInfo(id)).then(()=>setLoading(false))
   }
 
-  const deleteReport = () =>{
+  const onDeleteReport = () =>{
     if (!id) return;
-    axios.delete(`http://localhost:3000/api/reports/${id}/delete/`)
+    dispatch(deleteReport(id))
     .then(()=>{
       dispatch(stationsActions.clearReportInfo())
       navigate(`${ROUTES.STATIONS}`)
     })
   }
 
-  const formReport = () => {
+  const onFormReport = () => {
     if (!id) return;
-    axios.put(`http://localhost:3000/api/reports/${id}/form/`)
+    dispatch(formReport(id))
     .then(()=>{
       dispatch(stationsActions.clearReportInfo())
       navigate(`${ROUTES.STATIONS}`)
@@ -44,8 +40,8 @@ export const ReportPage: FC = () => {
   }
 
   const changeDate = () => {
-    axios.put(`http://localhost:3000/api/reports/${id}/`,{"report-date":pageData?.report_date})
-    .catch(()=>{if (!id) return; getPageData(id)})
+    if(!pageData?.report_date || !id) return
+    dispatch(changeReportDate({id:id,data:pageData.report_date})).then(()=>getPageData(id))
   }
 
   useEffect(() => {
@@ -70,15 +66,16 @@ export const ReportPage: FC = () => {
                 <input className="report-date-input" placeholder={"01.01.2024"}
                     disabled={pageData?.status != "Draft"}
                     value={pageData?.report_date|| "01.01.2024"}
-                    onChange={(event)=>
-                      { const newDate = event.target.value.trim()
-                        setPageData((prevData)=>{
-                        if (!prevData) return prevData;
-                        return {
-                          ...prevData,
-                          report_date:newDate
-                        }
-                      })}}
+                    onChange={(event) => {
+                      const newDate = event.target.value.trim();
+                      if (!pageData) return;
+                      dispatch(
+                        reportsActions.setReportInfo({
+                          ...pageData,
+                          report_date: newDate,
+                        })
+                      );
+                    }}
                     onBlur={(event) => {
                         const newDate = event.target.value.trim();
                         const isValidDate = /^\d{2}\.\d{2}\.\d{4}$/.test(newDate);
@@ -86,13 +83,13 @@ export const ReportPage: FC = () => {
                           alert("Введите дату в формате ДД.ММ.ГГГГ");
                           return;
                         }
-                        setPageData((prevData) => {
-                          if (!prevData) return prevData;
-                          return {
-                            ...prevData,
+                        if (!pageData) return;
+                        dispatch(
+                          reportsActions.setReportInfo({
+                            ...pageData,
                             report_date: newDate,
-                          };
-                        });
+                          })
+                        );
                         changeDate();
                       }}
                     type="text"/>
@@ -107,7 +104,7 @@ export const ReportPage: FC = () => {
               id="bin-image"
               alt="Удалить"
               src="http://localhost:9000/weather-station-images/bin_icon.png"
-              onClick={deleteReport}
+              onClick={onDeleteReport}
             />}
           </div>
             {loading && (
@@ -130,7 +127,7 @@ export const ReportPage: FC = () => {
             </div>
           ))
         ))}
-        {pageData?.status=="Draft" && <Button onClick={formReport} className="form-button">Сформировать</Button>}
+        {pageData?.status=="Draft" && <Button onClick={onFormReport} className="form-button">Сформировать</Button>}
         </Card.Body>
         
       </Card>
