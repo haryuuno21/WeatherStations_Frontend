@@ -3,7 +3,8 @@ import { Button, Card } from "react-bootstrap";
 import "./StaionReportCard.css"
 import { DEFAULT_PHOTO_URL } from "../../modules/mock";
 import { StationReport } from "../../api/Api";
-import axios from "axios";
+import { useAppDispatch } from "../../store";
+import { deleteStationFromReport, putTemperature } from "../../store/stations/slice";
 
 interface ICardProps{
   stationReport:StationReport;
@@ -18,19 +19,20 @@ export const StationReportCard: FC<ICardProps> = ({
   is_draft,
   onRemove,
 }) => {
+  const dispatch = useAppDispatch();
   const [temp, setTemperature] = useState(stationReport.temperature?.toString());
 
   const removeStaion = () =>{
-    axios.delete(`http://localhost:3000/api/stations-reports/${report_id}/${stationReport.station_id}/remove_station/`)
+    if(!report_id || !stationReport.station_id) return
+    dispatch(deleteStationFromReport({reportID:report_id, stationID:stationReport.station_id}))
     .then(()=>{
       onRemove(stationReport?.station_id||"");
     })
   }
 
   const changeTemp = () =>{
-    axios.put(`http://localhost:3000/api/stations-reports/${report_id}/${stationReport.station_id}/put_temperature/`,
-      {"temperature":parseInt(temp?.toString()||"0")}
-    )
+    if(!report_id || !stationReport.station_id) return
+    dispatch(putTemperature({reportID:report_id,stationID:stationReport.station_id,temp:parseInt(temp?.toString()||"0")}))
   }
 
   return (

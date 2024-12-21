@@ -38,15 +38,16 @@ const stationsSlice = createSlice({
             state.stations = action.payload.stations
             state.stationsCount = action.payload.stations_count
             state.currentReport = action.payload.current_report
-            console.log(action.payload)
         })
         builder.addCase(getStation.fulfilled,(state,action)=>{
             state.stationInfo = action.payload
         })
         builder.addCase(addStationToReport.fulfilled,(state,action)=>{
             state.stationsCount += 1
-            console.log(action.payload)
             state.currentReport = action.payload.currentReport
+        })
+        builder.addCase(deleteStationFromReport.fulfilled,(state)=>{
+            state.stationsCount -= 1
         })
     }
 })
@@ -61,3 +62,13 @@ export const getStation = createAsyncThunk<station,string>('stations/getStation'
 
 export const addStationToReport = createAsyncThunk<{currentReport:number},string>('stations/addToReport',async (id)=>
     api.stations.stationsAddToReportCreate(id).then(({data})=>data))
+
+export const deleteStationFromReport = createAsyncThunk<void,{reportID:string,stationID:string}>(
+    'stations/deleteFromReport', async (data) =>
+    api.stationsReports.stationsReportsRemoveStationDelete(data.reportID,data.stationID).then(()=>{return})
+)
+
+export const putTemperature = createAsyncThunk<void,{reportID:string,stationID:string,temp:number}>(
+    'stations/putTemperature', async (data) =>
+    api.stationsReports.stationsReportsPutTemperatureUpdate(data.reportID,data.stationID,data.temp).then(()=>{return})
+)

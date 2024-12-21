@@ -1,7 +1,6 @@
 import "./AllReportsPage.css";
 import { FC, useEffect, useState } from "react";
 import { Container, Card, Spinner, Button } from "react-bootstrap";
-import { api, report } from "../../api";
 import { ReportSmallInfo } from "../../components/ReportSmallInfo/ReportSmallInfo";
 import { useAppDispatch } from "../../store";
 import { useReports } from "../../store/reports";

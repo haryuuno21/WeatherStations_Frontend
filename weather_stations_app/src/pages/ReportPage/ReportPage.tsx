@@ -52,7 +52,6 @@ export const ReportPage: FC = () => {
 
   const onRemoveStation = () => {
     if (!id) return;
-    dispatch(stationsActions.removeStation());
     getPageData(id)
   }
 
