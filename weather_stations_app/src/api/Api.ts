@@ -594,7 +594,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     stationsAddToReportCreate: (id: string, params: RequestParams = {}) =>
-      this.request<void, void>({
+      this.request<{currentReport:number}, void>({
         path: `/stations/${id}/add-to-report/`,
         method: "POST",
         secure: true,

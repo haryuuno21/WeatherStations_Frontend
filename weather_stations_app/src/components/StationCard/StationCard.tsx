@@ -3,9 +3,8 @@ import { Button, Card } from "react-bootstrap";
 import "./StationCard.css";
 import { DEFAULT_PHOTO_URL } from "../../modules/mock";
 import { useUserGroup } from "../../store/user";
-import axios from "axios";
 import { useAppDispatch } from "../../store";
-import { stationsActions } from "../../store/stations";
+import { addStationToReport } from "../../store/stations/slice";
 
 interface ICardProps {
   id?: number;
@@ -26,10 +25,9 @@ export const StationCard: FC<ICardProps> = ({
   const userGroup = useUserGroup();
   const [disabled,setDisabled] = useState(false);
   const addStation = () =>{
-    axios.post(`http://localhost:3000/api/stations/${id}/add-to-report/`)
-    .then((response)=>{
-      dispatch(stationsActions.addStation())
-      dispatch(stationsActions.setCurrentReport(response.data["currentReport"]))
+    if(!id) return
+    dispatch(addStationToReport(id.toString()))
+    .then(()=>{
       setDisabled(true)
     })
     .catch(()=>setDisabled(true))

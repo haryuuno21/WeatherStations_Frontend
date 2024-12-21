@@ -43,6 +43,11 @@ const stationsSlice = createSlice({
         builder.addCase(getStation.fulfilled,(state,action)=>{
             state.stationInfo = action.payload
         })
+        builder.addCase(addStationToReport.fulfilled,(state,action)=>{
+            state.stationsCount += 1
+            console.log(action.payload)
+            state.currentReport = action.payload.currentReport
+        })
     }
 })
 
@@ -53,3 +58,6 @@ export const getStations = createAsyncThunk<stations,string|undefined>('stations
 
 export const getStation = createAsyncThunk<station,string>('stations/getStation',async (id) =>
     api.stations.stationsRead(id).then(({data})=>data))
+
+export const addStationToReport = createAsyncThunk<{currentReport:number},string>('stations/addToReport',async (id)=>
+    api.stations.stationsAddToReportCreate(id).then(({data})=>data))
