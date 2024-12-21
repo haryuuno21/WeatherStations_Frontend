@@ -5,12 +5,24 @@ const reportsSlice = createSlice({
     name: "reports",
     initialState: {
         reports: [] as report[],
-        reportInfo: null as temperatureReport|null
+        reportInfo: null as temperatureReport|null,
+        status: "",
+        startDate: "",
+        endDate: "",
     },
     reducers: {
         setReportInfo(state,{payload}){
             state.reportInfo = payload
-        }
+        },
+        setStatusFilter(state,{payload}){
+            state.status = payload
+        },
+        setStartDate(state,{payload}){
+            state.startDate = payload
+        },
+        setEndDate(state,{payload}){
+            state.endDate = payload
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(getReports.fulfilled,(state,action)=>{

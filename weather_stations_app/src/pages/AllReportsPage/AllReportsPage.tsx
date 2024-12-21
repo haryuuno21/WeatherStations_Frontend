@@ -3,15 +3,15 @@ import { FC, useEffect, useState } from "react";
 import { Container, Card, Spinner, Button } from "react-bootstrap";
 import { ReportSmallInfo } from "../../components/ReportSmallInfo/ReportSmallInfo";
 import { useAppDispatch } from "../../store";
-import { useReports } from "../../store/reports";
-import { getReports } from "../../store/reports/slice";
+import { useEndDate, useReports, useStartDate, useStatus } from "../../store/reports";
+import { getReports, reportsActions } from "../../store/reports/slice";
 
 export const AllReportsPage: FC = () => {
     const dispatch = useAppDispatch();
     const reports = useReports();
-    const [status, setStatus] = useState("");
-    const [startDate, setStartDate] = useState("");
-    const [endDate, setEndDate] = useState("");
+    const status = useStatus();
+    const startDate = useStartDate();
+    const endDate = useEndDate();
     const [loading, setLoading] = useState(false);
     useEffect(() => {
       onApplyFilter()
@@ -34,19 +34,19 @@ export const AllReportsPage: FC = () => {
               placeholder="Статус"
               id="status-filter"
               value={status}
-              onChange={(event) => setStatus(event.target.value.trim())}
+              onChange={(event) => dispatch(reportsActions.setStatusFilter(event.target.value.trim()))}
             ></input>
             <input
               className="date-filter"
               value={startDate}
-              onChange={(event) => setStartDate(event.target.value.trim())}
+              onChange={(event) => dispatch(reportsActions.setStartDate(event.target.value.trim()))}
               type="date"
             ></input>
             <h2>-</h2>
             <input
               className="date-filter"
               value={endDate}
-              onChange={(event) => setEndDate(event.target.value.trim())}
+              onChange={(event) => dispatch(reportsActions.setEndDate(event.target.value.trim()))}
               type="date"
             ></input>
             <Button variant="secondary" onClick={onApplyFilter}>Фильтр</Button>
