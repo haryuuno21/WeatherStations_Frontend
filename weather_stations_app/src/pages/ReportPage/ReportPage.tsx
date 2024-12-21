@@ -5,9 +5,9 @@ import { Container, Card, CardText,Spinner, Button } from "react-bootstrap";
 import { api, temperatureReport } from "../../api";
 import { StationReportCard } from "../../components/StationReportCard/StationReportCard";
 import { useAppDispatch } from "../../store";
-import { reportActions } from "../../store/report";
 import axios from "axios";
 import { ROUTES } from "../../Routes";
+import { stationsActions } from "../../store/stations";
 
 export const ReportPage: FC = () => {
   const dispatch = useAppDispatch();
@@ -29,7 +29,7 @@ export const ReportPage: FC = () => {
     if (!id) return;
     axios.delete(`http://localhost:3000/api/reports/${id}/delete/`)
     .then(()=>{
-      dispatch(reportActions.clearReportInfo())
+      dispatch(stationsActions.clearReportInfo())
       navigate(`${ROUTES.STATIONS}`)
     })
   }
@@ -38,7 +38,7 @@ export const ReportPage: FC = () => {
     if (!id) return;
     axios.put(`http://localhost:3000/api/reports/${id}/form/`)
     .then(()=>{
-      dispatch(reportActions.clearReportInfo())
+      dispatch(stationsActions.clearReportInfo())
       navigate(`${ROUTES.STATIONS}`)
     })
   }
@@ -56,7 +56,7 @@ export const ReportPage: FC = () => {
 
   const onRemoveStation = () => {
     if (!id) return;
-    dispatch(reportActions.removeStation());
+    dispatch(stationsActions.removeStation());
     getPageData(id)
   }
 

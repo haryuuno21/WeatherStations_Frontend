@@ -150,7 +150,7 @@ export interface GETStations {
    * Stations count
    * @default 0
    */
-  stations_count?: number;
+  stations_count: number;
   stations: Station[];
 }
 

@@ -1,27 +1,24 @@
 import "./StationInfoPage.css";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect} from "react";
 import { BreadCrumbs } from "../../components/BreadCrumbs/BreadCrumbs";
 import { ROUTES, ROUTE_LABELS } from "../../Routes";
 import { useParams } from "react-router-dom";
 import { Container, Card } from "react-bootstrap";
 import { STATIONS_MOCK } from "../../modules/mock";
 import { DEFAULT_PHOTO_URL } from "../../modules/mock";
-import { api, station } from "../../api";
+import { useStationInfo } from "../../store/stations";
+import { useAppDispatch } from "../../store";
+import { getStation, stationsActions } from "../../store/stations/slice";
 
 export const StationInfoPage: FC = () => {
-  const [pageData, setPageData] = useState<station>();
-
+  const pageData = useStationInfo();
+  const dispatch = useAppDispatch();
   const { id } = useParams();
 
   useEffect(() => {
     if (!id) return;
-    api.stations.stationsRead(id)
-      .then((response) => {
-        setPageData(response.data)
-      })
-      .catch(()=>{
-        setPageData(STATIONS_MOCK.stations[parseInt(id)])
-      });
+    dispatch(getStation(id))
+      .catch(()=>dispatch(stationsActions.setStationInfo(STATIONS_MOCK.stations[parseInt(id)])))
     return;
   }, [id]);
 

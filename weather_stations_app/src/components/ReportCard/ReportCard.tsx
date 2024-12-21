@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { Button, Card } from "react-bootstrap";
 import "./ReportCard.css";
-import { useCurrentReport, useStationsCount } from "../../store/report";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../Routes";
+import { useCurrentReport, useStationsCount } from "../../store/stations";
 
 export const ReportCard: FC = () => {
   const stationsCount = useStationsCount();

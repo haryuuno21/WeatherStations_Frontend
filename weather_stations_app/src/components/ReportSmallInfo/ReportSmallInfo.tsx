@@ -20,7 +20,7 @@ export const ReportSmallInfo: FC<report> = (report) => {
         <Card.Title className="report-card-id">{report.id}</Card.Title>
         <Card.Text className="report-card-date">{report.report_date}</Card.Text>
         <Card.Text className="report-card-status">{status_to_rus[report.status]}</Card.Text>
-        <Card.Text className="report-card-formed">{format(parseISO(report.formation_date), "dd.MM.yyyy HH:mm")}</Card.Text>
+        <Card.Text className="report-card-formed">{format(parseISO(report.formation_date || "0"), "dd.MM.yyyy HH:mm")}</Card.Text>
         <Card.Text className="report-card-temperature">{report.average_temperature || "–"}</Card.Text>
         <Button onClick={() => navigate(`${ROUTES.REPORTS}/${report.id}`)}>Подробнее</Button>
       </Card.Body>

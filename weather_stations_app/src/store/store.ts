@@ -1,12 +1,12 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { dataReducer } from "./data/slice";
 import { userReducer } from './user';
-import { reportReducer } from './report';
+import { stationsReducer } from './stations';
 
 export const store = configureStore({
     reducer: combineReducers({
         data: dataReducer,
         user: userReducer,
-        report: reportReducer,
+        stations: stationsReducer,
     }),
 });

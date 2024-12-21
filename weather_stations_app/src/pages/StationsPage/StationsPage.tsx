@@ -10,57 +10,37 @@ import { STATIONS_MOCK } from "../../modules/mock";
 import { useAppDispatch } from "../../store";
 import { dataActions, useStationName } from "../../store/data";
 import { ReportCard } from "../../components/ReportCard/ReportCard";
-import { api,station } from '../../api'
 import { useUserGroup } from "../../store/user";
-import { reportActions } from "../../store/report";
+import { stationsActions, useStations } from "../../store/stations";
+import { getStations } from "../../store/stations/slice";
 
 export const StationsPage: FC = () => {
   const dispatch = useAppDispatch();
   const station_name = useStationName();
   const [loading, setLoading] = useState(false);
-  const [stations, setStations] = useState<station[]>([]);
+  const stations = useStations();
   const userGroup = useUserGroup();
   const navigate = useNavigate();
 
-  const firstLoadSearch = () => {
+  const handleSearch = () => {
     setLoading(true);
-    api.stations.stationsList({station_name:station_name})
-      .then((response) => {
-        setStations(
-          response.data.stations
-        );
-        dispatch(reportActions.setCurrentReport(response.data.current_report))
-        dispatch(reportActions.setStationsCount(response.data.stations_count))
-        setLoading(false);
+    dispatch(getStations(station_name))
+      .then(()=>{
+        setLoading(false)
       })
-      .catch(() => {
-        setStations(STATIONS_MOCK.stations.filter((item)=>
-        item.short_name.toLocaleLowerCase().search(station_name.toLocaleLowerCase())>=0))
-        setLoading(false);
+      .catch(()=>{
+        dispatch(stationsActions.setStationsList(STATIONS_MOCK.stations.filter((item)=>
+          item.short_name.toLocaleLowerCase().search(station_name.toLocaleLowerCase())>=0)))
+        setLoading(false)
       })
   }
 
-  const handleSearch = () => {
-    setLoading(true);
-    api.stations.stationsList({station_name:station_name})
-      .then((response) => {
-        setStations(
-          response.data.stations
-        );
-        setLoading(false);
-      })
-      .catch(() => {
-        setStations(STATIONS_MOCK.stations.filter((item)=>
-        item.short_name.toLocaleLowerCase().search(station_name.toLocaleLowerCase())>=0))
-        setLoading(false);
-      })
-  };
   const handleCardClick = (id?: number) => {
     navigate(`${ROUTES.STATIONS}/${id}`);
   };
 
   useEffect(()=>{
-    firstLoadSearch();
+    handleSearch();
     return;
   },[])
 

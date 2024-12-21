@@ -5,7 +5,7 @@ import { DEFAULT_PHOTO_URL } from "../../modules/mock";
 import { useUserGroup } from "../../store/user";
 import axios from "axios";
 import { useAppDispatch } from "../../store";
-import { reportActions } from "../../store/report";
+import { stationsActions } from "../../store/stations";
 
 interface ICardProps {
   id?: number;
@@ -28,8 +28,8 @@ export const StationCard: FC<ICardProps> = ({
   const addStation = () =>{
     axios.post(`http://localhost:3000/api/stations/${id}/add-to-report/`)
     .then((response)=>{
-      dispatch(reportActions.addStation())
-      dispatch(reportActions.setCurrentReport(response.data["currentReport"]))
+      dispatch(stationsActions.addStation())
+      dispatch(stationsActions.setCurrentReport(response.data["currentReport"]))
       setDisabled(true)
     })
     .catch(()=>setDisabled(true))

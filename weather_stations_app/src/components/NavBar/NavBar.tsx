@@ -9,7 +9,7 @@ import { userActions, useUserGroup, useUserName } from '../../store/user';
 import axios from 'axios';
 import { useAppDispatch } from '../../store';
 import { dataActions } from '../../store/data';
-import { reportActions } from '../../store/report';
+import { stationsActions } from '../../store/stations';
 
 export const Navigation: FC = () => {
   const dispatch = useAppDispatch();
@@ -22,7 +22,7 @@ export const Navigation: FC = () => {
     axios.post('http://localhost:3000/api/users/deauthorization/').then(() =>{
         dispatch(userActions.logout())
         dispatch(dataActions.setStationName(""))
-        dispatch(reportActions.clearReportInfo())
+        dispatch(stationsActions.clearReportInfo())
         navigate(`${ROUTES.STATIONS}`)
     }).catch((response) => console.log(response.status))
   }
