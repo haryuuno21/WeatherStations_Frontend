@@ -1,34 +1,21 @@
-import axios, { AxiosResponse } from "axios";
 import "./ProfilePage.css";
 import { FC, FormEvent, useState } from "react";
 import { Container, Card , Form, Button} from "react-bootstrap";
-import { userActions, useUserName } from "../../store/user";
 import { useAppDispatch } from "../../store";
+import { changeUser } from "../../store/user/slice";
 
 export const ProfilePage: FC = () => {
   const dispatch = useAppDispatch();
-  const [newLogin, setLogin] = useState("");
+  const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
-  const changeUser = (event:FormEvent) =>{
+  const onUserChange = (event:FormEvent) =>{
+    let newLogin = (login == "")?undefined:login
+    let newPassword = (password == "")?undefined:password
+    let newEmail = (email == "")?undefined:email
     event.preventDefault();
-    if(newLogin!=""){
-      axios.put('http://localhost:3000/api/users/change/',{
-        username: newLogin
-      }).then(()=>dispatch(userActions.setUserName(newLogin)))
-      .catch((response:AxiosResponse) => alert(response))
-    }
-    if(password!=""){
-      axios.put('http://localhost:3000/api/users/change/',{
-        password: password
-      }).catch((response:AxiosResponse) => alert(response))
-    }
-    if(email!=""){
-      axios.put('http://localhost:3000/api/users/change/',{
-        email: email
-      }).catch((response:AxiosResponse) => alert(response))
-    }
+    dispatch(changeUser({username:newLogin,password:newPassword,email:newEmail}))
   }
 
   return (
@@ -36,13 +23,13 @@ export const ProfilePage: FC = () => {
       <Card className="profile-page">
         <Card.Title className="largeText">Изменение профиля</Card.Title>
         <Card.Body className="card-body">
-        <Form onSubmit={changeUser} className="profile-form">
+        <Form onSubmit={onUserChange} className="profile-form">
             <Form.Group className="mb-3" controlId="formLogin">
                 <Form.Label>Логин</Form.Label>
                 <Form.Control
                     type="text"
                     placeholder="Новый логин"
-                    value={newLogin}
+                    value={login}
                     onChange={(e) => setLogin(e.target.value)}
                 />
             </Form.Group>

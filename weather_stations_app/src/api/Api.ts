@@ -160,13 +160,13 @@ export interface User {
    * @minLength 1
    * @maxLength 150
    */
-  username: string;
+  username?: string;
   /**
    * Пароль
    * @minLength 1
    * @maxLength 255
    */
-  password: string;
+  password?: string;
   /**
    * Email адрес
    * @minLength 1
@@ -665,12 +665,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags users
      * @name UsersUpdate
-     * @request PUT:/users/{id}/
+     * @request PUT:/users/change/
      * @secure
      */
-    usersUpdate: (id: string, data: User, params: RequestParams = {}) =>
+    usersUpdate: (data: User, params: RequestParams = {}) =>
       this.request<User, any>({
-        path: `/users/${id}/`,
+        path: `/users/change/`,
         method: "PUT",
         body: data,
         secure: true,
