@@ -30,6 +30,10 @@ const userSlice = createSlice({
             state.userGroup = action.payload.userGroup
             state.userName = action.payload.userName
         })
+        builder.addCase(deauthorizeUser.fulfilled,(state)=>{
+            state.userGroup = "guest"
+            state.userName = ""
+        })
     }
 })
 
@@ -37,3 +41,6 @@ export const { actions: userActions, reducer: userReducer } = userSlice
 
 export const getUser = createAsyncThunk<userResponse,User>('user/getUser', async (user) =>
     api.users.usersAuthenticationCreate(user).then(({data})=>data))
+
+export const deauthorizeUser = createAsyncThunk<void,void>('user/deauthorization',async ()=>
+    api.users.usersDeauthorizationCreate().then())

@@ -5,11 +5,11 @@ import './NavBar.css';
 import { ROUTES } from '../../Routes';
 import { Link, useNavigate } from 'react-router-dom';
 import { FC, MouseEvent} from 'react';
-import { userActions, useUserGroup, useUserName } from '../../store/user';
-import axios from 'axios';
+import { useUserGroup, useUserName } from '../../store/user';
 import { useAppDispatch } from '../../store';
 import { dataActions } from '../../store/data';
 import { stationsActions } from '../../store/stations';
+import { deauthorizeUser } from '../../store/user/slice';
 
 export const Navigation: FC = () => {
   const dispatch = useAppDispatch();
@@ -19,12 +19,11 @@ export const Navigation: FC = () => {
 
   const logout = (event: MouseEvent) =>{
     event.preventDefault();
-    axios.post('http://localhost:3000/api/users/deauthorization/').then(() =>{
-        dispatch(userActions.logout())
-        dispatch(dataActions.setStationName(""))
-        dispatch(stationsActions.clearReportInfo())
-        navigate(`${ROUTES.STATIONS}`)
-    }).catch((response) => console.log(response.status))
+    dispatch(deauthorizeUser()).then(()=>{
+      dispatch(dataActions.setStationName(""))
+      dispatch(stationsActions.clearReportInfo())
+      navigate(`${ROUTES.STATIONS}`)
+    })
   }
 
   return (
