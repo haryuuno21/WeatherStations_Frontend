@@ -8,17 +8,17 @@ import { getUser } from "../../store/user/slice";
 
 export const AuthPage: FC = () => {
   const dispatch = useAppDispatch();
-  const [login, setLogin] = useState("");
+  const [username, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const submitUser = async (event: FormEvent) => {
     event.preventDefault();
     try {
-        await dispatch(getUser({ login, password })).unwrap();
+        await dispatch(getUser({username, password })).unwrap();
         navigate(`${ROUTES.STATIONS}`);
     } catch (error) {
-        alert("Неправильный логин или пароль");
+        console.log("Неправильный логин или пароль");
     }
 };
 
@@ -33,7 +33,7 @@ export const AuthPage: FC = () => {
                 <Form.Control
                     type="text"
                     placeholder="Введите логин"
-                    value={login}
+                    value={username}
                     onChange={(e) => setLogin(e.target.value)}
                 />
             </Form.Group>

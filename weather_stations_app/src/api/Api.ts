@@ -167,6 +167,12 @@ export interface User {
    * @maxLength 255
    */
   password: string;
+  /**
+   * Email адрес
+   * @minLength 1
+   * @maxLength 254
+   */
+  email?: string;
 }
 
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, HeadersDefaults, ResponseType } from "axios";
@@ -594,7 +600,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     stationsAddToReportCreate: (id: string, params: RequestParams = {}) =>
-      this.request<{currentReport:number}, void>({
+      this.request<{currentReport: number}, void>({
         path: `/stations/${id}/add-to-report/`,
         method: "POST",
         secure: true,
@@ -611,7 +617,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     usersAuthenticationCreate: (data: User, params: RequestParams = {}) =>
-      this.request<string, void>({
+      this.request<{userName: string, userGroup: string}, void>({
         path: `/users/authentication/`,
         method: "POST",
         body: data,

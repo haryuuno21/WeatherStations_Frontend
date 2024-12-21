@@ -1,10 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import axios from "axios";
-
-interface userRequest{
-    login : string;
-    password : string;
-}
+import { api } from "../../api";
+import { User } from "../../api/Api";
 
 interface userResponse{
     userName : string;
@@ -39,10 +35,5 @@ const userSlice = createSlice({
 
 export const { actions: userActions, reducer: userReducer } = userSlice
 
-export const getUser = createAsyncThunk<userResponse,userRequest>('user/getUser', async (user:userRequest) =>{
-    const response = await axios.post('http://localhost:3000/api/users/authentication/',{
-        username: user.login,
-        password: user.password,
-    })
-    return response.data
-})
+export const getUser = createAsyncThunk<userResponse,User>('user/getUser', async (user) =>
+    api.users.usersAuthenticationCreate(user).then(({data})=>data))
