@@ -44,3 +44,6 @@ export const getUser = createAsyncThunk<userResponse,User>('user/getUser', async
 
 export const deauthorizeUser = createAsyncThunk<void,void>('user/deauthorization',async ()=>
     api.users.usersDeauthorizationCreate().then())
+
+export const registrationUser = createAsyncThunk<void,User>('user/register', async (user) =>
+    api.users.usersRegistrationCreate(user).then())

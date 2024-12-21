@@ -1,11 +1,13 @@
-import axios, { AxiosResponse } from "axios";
 import "./RegistrationPage.css";
 import { FC, FormEvent, useState } from "react";
 import { Container, Card , Form, Button} from "react-bootstrap";
 import { ROUTES } from "../../Routes";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../store";
+import { registrationUser } from "../../store/user/slice";
 
 export const RegistrationPage: FC = () => {
+  const dispatch = useAppDispatch();
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -13,13 +15,9 @@ export const RegistrationPage: FC = () => {
 
   const registerUser = (event:FormEvent) =>{
     event.preventDefault();
-    axios.post('http://localhost:3000/api/users/registration/',{
-      username: login,
-      password: password,
-      email: email,
-    }).then(() =>{
+    dispatch(registrationUser({username:login,password:password,email:email})).then(() =>{
         navigate(`${ROUTES.LOGIN}`)
-    }).catch((response:AxiosResponse) => console.log(response.status))
+    })
   }
 
   return (
