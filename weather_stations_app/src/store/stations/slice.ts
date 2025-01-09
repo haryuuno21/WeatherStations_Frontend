@@ -7,37 +7,73 @@ const stationsSlice = createSlice({
         currentReport: null as number|null|undefined,
         stationsCount: 0,
         stations:[] as station[],
-        stationInfo: null as station|null
+        stationInfo: null as station|null,
+        foundStationsCount: 0,
+        nextPageURL: null as string|null,
+        prevPageURL: null as string|null,
+        currentPage: "1"
     },
     reducers: {
         setCurrentReport(state, {payload}) {
             state.currentReport = payload
         },
+
         setStationsCount(state, {payload}) {
             state.stationsCount = payload
         },
+
         addStation(state){
             state.stationsCount += 1
         },
+
         removeStation(state){
             if(state.stationsCount>0) state.stationsCount += 1
         },
+
         clearReportInfo(state){
             state.stationsCount = 0
             state.currentReport = null
         },
+
         setStationsList(state, {payload}) {
             state.stations = payload
         },
+
         setStationInfo(state, {payload}) {
             state.stationInfo = payload
-        }
+        },
+
+        nextPage(state){
+            if(state.nextPageURL!=null){
+                const url = new URL(state.nextPageURL)
+                state.currentPage = url.searchParams.get("page")|| "last";
+            }
+        },
+        
+        prevPage(state){
+            if(state.prevPageURL!=null){
+                const url = new URL(state.prevPageURL)
+                state.currentPage = url.searchParams.get("page")|| "1";
+            }
+        },
+
+        firstPage(state){
+            state.currentPage = "1"
+        },
+
+        lastPage(state){
+            state.currentPage = "last"
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(getStations.fulfilled,(state,action)=>{
-            state.stations = action.payload.stations
-            state.stationsCount = action.payload.stations_count
-            state.currentReport = action.payload.current_report
+            const payload = action.payload
+            state.nextPageURL = payload.next
+            state.prevPageURL = payload.previous
+            state.foundStationsCount = payload.count
+            state.stations = payload.results.stations
+            state.stationsCount = payload.results.stations_count
+            state.currentReport = payload.results.current_report
         })
         builder.addCase(getStation.fulfilled,(state,action)=>{
             state.stationInfo = action.payload
@@ -54,8 +90,8 @@ const stationsSlice = createSlice({
 
 export const { actions: stationsActions, reducer: stationsReducer } = stationsSlice
 
-export const getStations = createAsyncThunk<stations,string|undefined>('stations/getStaions', async (stationName) =>
-    api.stations.stationsList({station_name:stationName}).then(({data})=>data))
+export const getStations = createAsyncThunk<stations,{stationName:string|undefined,page:string|undefined}>('stations/getStaions', async (data) =>
+    api.stations.stationsList({station_name:data.stationName,page:data.page}).then(({data})=>data))
 
 export const getStation = createAsyncThunk<station,string>('stations/getStation',async (id) =>
     api.stations.stationsRead(id).then(({data})=>data))

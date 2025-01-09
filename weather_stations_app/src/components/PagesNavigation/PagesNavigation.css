@@ -1,0 +1,13 @@
+.pages-navigation{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pages-navigation > .btn{
+    margin: 5px;
+}
+.pages-navigation > h5{
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 0;
+}

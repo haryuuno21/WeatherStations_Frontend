@@ -13,3 +13,14 @@ export const useStations = () =>
 export const useStationInfo = () =>
     useSelector((state:RootState) => state.stations.stationInfo)
 
+export const useNextPage = () =>
+    useSelector((state:RootState) => state.stations.nextPageURL)
+
+export const usePrevPage = () =>
+    useSelector((state:RootState) => state.stations.prevPageURL)
+
+export const useFoundCount = () =>
+    useSelector((state:RootState) => state.stations.foundStationsCount)
+
+export const useCurrentPage = () =>
+    useSelector((state:RootState) => state.stations.currentPage)

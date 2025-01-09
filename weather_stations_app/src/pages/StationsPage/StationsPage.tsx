@@ -6,33 +6,30 @@ import { BreadCrumbs } from "../../components/BreadCrumbs/BreadCrumbs";
 import { ROUTES, ROUTE_LABELS } from "../../Routes";
 import { StationCard } from "../../components/StationCard/StationCard";
 import { useNavigate } from "react-router-dom";
-import { STATIONS_MOCK } from "../../modules/mock";
 import { useAppDispatch } from "../../store";
 import { dataActions, useStationName } from "../../store/data";
 import { ReportCard } from "../../components/ReportCard/ReportCard";
 import { useUserGroup } from "../../store/user";
-import { stationsActions, useStations } from "../../store/stations";
-import { getStations } from "../../store/stations/slice";
+import { useCurrentPage, useStations } from "../../store/stations";
+import { getStations, stationsActions } from "../../store/stations/slice";
+import { PagesNavigation } from "../../components/PagesNavigation/PagesNavigation";
 
 export const StationsPage: FC = () => {
   const dispatch = useAppDispatch();
   const station_name = useStationName();
   const [loading, setLoading] = useState(false);
+  const currentPage = useCurrentPage();
   const stations = useStations();
   const userGroup = useUserGroup();
   const navigate = useNavigate();
 
   const handleSearch = () => {
-    setLoading(true);
-    dispatch(getStations(station_name))
-      .then(()=>{
-        setLoading(false)
-      })
-      .catch(()=>{
-        dispatch(stationsActions.setStationsList(STATIONS_MOCK.stations.filter((item)=>
-          item.short_name.toLocaleLowerCase().search(station_name.toLocaleLowerCase())>=0)))
-        setLoading(false)
-      })
+    dispatch(stationsActions.firstPage())
+    dispatch(getStations({stationName:station_name,page:"1"}))
+    .then(()=>{
+      setLoading(false)
+    })
+    return;
   }
 
   const handleCardClick = (id?: number) => {
@@ -40,9 +37,13 @@ export const StationsPage: FC = () => {
   };
 
   useEffect(()=>{
-    handleSearch();
+    setLoading(true);
+    dispatch(getStations({stationName:station_name,page:currentPage}))
+      .then(()=>{
+        setLoading(false)
+      })
     return;
-  },[])
+  },[currentPage])
 
   return (
     <Container id="stations-page">
@@ -67,7 +68,8 @@ export const StationsPage: FC = () => {
             <h1>К сожалению, ничего не найдено :(</h1>
           </div>
         ) : (
-          <Row xs={1} sm={2} md={3} className="g-4">
+          <div>
+            <Row xs={1} sm={2} md={3} className="g-4">
             {stations.map((item, index) => (
               <Col className="station-card-col" key={index}>
                 <StationCard
@@ -77,8 +79,10 @@ export const StationsPage: FC = () => {
               </Col>
             ))}
           </Row>
+          </div>
         ))
       }
+      <PagesNavigation/>
       </Col>
       {userGroup!='guest' && (<Col>
         <ReportCard></ReportCard>

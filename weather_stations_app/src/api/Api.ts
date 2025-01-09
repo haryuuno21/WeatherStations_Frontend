@@ -154,6 +154,19 @@ export interface GETStations {
   stations: Station[];
 }
 
+export interface PaginatedStations{
+  /**
+   * Number of stations found
+   * @default 0
+   */
+  count: number;
+  /** Next page URL */
+  next: string | null;
+  /** Previous page URL */
+  previous: string | null;
+  results: GETStations;
+}
+
 export interface User {
   /**
    * Username
@@ -493,10 +506,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       query?: {
         /** Название станции */
         station_name?: string;
+        /** Страница */
+        page?: string;
       },
       params: RequestParams = {},
     ) =>
-      this.request<GETStations, any>({
+      this.request<PaginatedStations, any>({
         path: `/stations/`,
         method: "GET",
         query: query,
